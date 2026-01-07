@@ -1,0 +1,30 @@
+<div class="shop-container">
+
+    <div class="shop-header">
+        <img class="shop-logo" [src]="seller?.shop_image || 'assets/default-shop.png'" alt="Shop Logo"
+            (click)="openDrawer()" />
+        <h2 class="title">My Shop</h2>
+    </div>
+
+    <div class="card-grid">
+
+        <div class="shop-card" (click)="goTo('add-product')">
+            <h3>Add Product</h3>
+            <p>Add new items to your shop</p>
+        </div>
+
+        <div class="shop-card" (click)="goTo('my-products')">
+            <h3>My Products</h3>
+            <p>View and edit your products</p>
+        </div>
+
+        <div class="shop-card" (click)="goTo('my-orders')">
+            <h3>My Orders</h3>
+            <p>Check customer orders</p>
+        </div>
+
+    </div>
+</div>
+
+<app-drawer *ngIf="isDrawerOpen && seller" [seller]="seller" (close)="closeDrawer()">
+</app-drawer>

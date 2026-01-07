@@ -11,14 +11,8 @@ export const routes: Routes = [
   },
 
   // =========================
-  // Seller Area
+  // Seller Auth
   // =========================
-  {
-    path: 'seller',
-    loadComponent: () =>
-      import('./seller/dashboard/dashboard')
-        .then(m => m.DashboardComponent)
-  },
   {
     path: 'seller/login',
     loadComponent: () =>
@@ -30,5 +24,38 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./seller/signup/signup')
         .then(m => m.SignupComponent)
+  },
+
+  // =========================
+  // Seller Shop
+  // =========================
+  {
+    path: 'seller',
+    redirectTo: 'seller/my-shop',
+    pathMatch: 'full'
+  },
+  {
+    path: 'seller/my-shop',
+    loadComponent: () =>
+      import('./seller/shop/my-shop/my-shop')
+        .then(m => m.MyShopComponent)
+  },
+  {
+    path: 'seller/my-shop/add-product',
+    loadComponent: () =>
+      import('./seller/shop/add-product/add-product')
+        .then(m => m.AddProductComponent)
+  },
+  {
+    path: 'seller/my-shop/my-products',
+    loadComponent: () =>
+      import('./seller/shop/my-products/my-products')
+        .then(m => m.MyProductsComponent)
+  },
+  {
+    path: 'seller/my-shop/my-orders',
+    loadComponent: () =>
+      import('./seller/shop/my-orders/my-orders')
+        .then(m => m.MyOrdersComponent)
   }
 ];

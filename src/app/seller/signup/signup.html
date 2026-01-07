@@ -1,1 +1,165 @@
-<p>signup works!</p>
+<div class="signup-container">
+    <div class="signup-card">
+
+        <!-- HEADER -->
+        <h2>Seller Registration</h2>
+        <p class="subtitle">
+            Register your shop and start selling on Digital Shop
+        </p>
+
+        <!-- FORM -->
+        <form #signupForm="ngForm" (ngSubmit)="submitSignup(signupForm)" novalidate>
+
+            <!-- ========================= -->
+            <!-- STATE -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>State <span class="required">*</span></label>
+                <select [(ngModel)]="signupData.state_id" name="state" (ngModelChange)="onStateChange($event)" required>
+                    <option [ngValue]="0">Select State</option>
+                    <option *ngFor="let state of states; trackBy: trackById" [ngValue]="state.state_id">
+                        {{ state.state_name }}
+                    </option>
+                </select>
+                <small *ngIf="isLoadingStates" class="info">Loading states…</small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- DISTRICT -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>District <span class="required">*</span></label>
+                <select [(ngModel)]="signupData.district_id" name="district" (ngModelChange)="onDistrictChange($event)"
+                    [disabled]="!signupData.state_id" required>
+                    <option [ngValue]="0">Select District</option>
+                    <option *ngFor="let d of districts; trackBy: trackById" [ngValue]="d.district_id">
+                        {{ d.district_name }}
+                    </option>
+                </select>
+                <small *ngIf="isLoadingDistricts" class="info">Loading districts…</small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- MARKET -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Market <span class="required">*</span></label>
+
+                <input type="text" name="market" [(ngModel)]="marketInput" (input)="onMarketInputChange()"
+                    [disabled]="!signupData.district_id" placeholder="Type your market name" autocomplete="off" />
+
+                <ul class="suggestions" *ngIf="showMarketSuggestions">
+                    <li *ngFor="let m of filteredMarkets; trackBy: trackById" (click)="selectMarket(m)">
+                        {{ m.market_name }}
+                    </li>
+                    <li class="other-option" (click)="selectOtherMarket()">
+                        + Other (add later from profile)
+                    </li>
+                </ul>
+
+                <small class="hint">
+                    Can’t find your market? Select <b>Other</b>.
+                </small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- SHOPKEEPER NAME -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Shopkeeper Name <span class="required">*</span></label>
+                <input type="text" name="shopkeeper_name" [(ngModel)]="signupData.shopkeeper_name"
+                    placeholder="Your full name" required />
+            </div>
+
+            <!-- ========================= -->
+            <!-- SHOP NAME -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Shop Name <span class="required">*</span></label>
+                <input type="text" name="shop_name" [(ngModel)]="signupData.shop_name" placeholder="Your shop name"
+                    required />
+            </div>
+
+            <!-- ========================= -->
+            <!-- SHOP LOCATION -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Exact Shop Location <span class="required">*</span></label>
+                <input type="text" name="shop_location" [(ngModel)]="signupData.shop_location"
+                    placeholder="Street / Area / Landmark" required />
+                <small class="hint">
+                    Example: Near Bus Stand, Main Road, Palampur
+                </small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- SHOP IMAGE -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Shop Image <span class="required">*</span></label>
+                <input type="file" accept="image/*" (change)="onShopImageSelected($event)" />
+                <small class="hint">
+                    Upload a clear image of your shop
+                </small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- USERNAME -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Username <span class="required">*</span></label>
+                <input type="text" name="username" [(ngModel)]="signupData.username"
+                    (ngModelChange)="onUsernameChange()" placeholder="Choose a unique username" required />
+
+                <small *ngIf="isCheckingUsername" class="info">
+                    Checking availability…
+                </small>
+
+                <small *ngIf="usernameAvailable === true" class="success">
+                    Username is available ✔
+                </small>
+
+                <small *ngIf="usernameAvailable === false" class="error">
+                    Username already exists ✖
+                </small>
+            </div>
+
+            <!-- ========================= -->
+            <!-- PASSWORD -->
+            <!-- ========================= -->
+            <div class="form-group">
+                <label>Password <span class="required">*</span></label>
+                <input type="password" name="password" [(ngModel)]="signupData.password"
+                    placeholder="Create a strong password" required />
+            </div>
+
+            <!-- ========================= -->
+            <!-- SUBMIT -->
+            <!-- ========================= -->
+            <button type="submit" class="signup-btn" [disabled]="
+          !signupData.state_id ||
+          !signupData.district_id ||
+          (!signupData.market_id && !isOtherMarket) ||
+          !signupData.shopkeeper_name ||
+          !signupData.shop_name ||
+          !signupData.shop_location ||
+          !signupData.username ||
+          !signupData.password ||
+          !selectedShopImage ||
+          usernameAvailable !== true
+        ">
+                Complete Registration
+            </button>
+
+        </form>
+
+        <!-- FOOTER -->
+        <div class="links">
+            <p>
+                Already registered?
+                <a routerLink="/seller/login">Login</a>
+            </p>
+        </div>
+
+    </div>
+</div>

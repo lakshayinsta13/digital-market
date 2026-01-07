@@ -1,0 +1,87 @@
+.shop-container {
+    padding: 24px;
+}
+
+.title {
+    margin-bottom: 24px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.shop-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.shop-card h3 {
+    margin: 0 0 8px;
+}
+
+.shop-card p {
+    color: #555;
+}
+
+.drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.drawer-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.close-btn {
+    float: right;
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+.shop-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.shop-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #eee;
+  transition: transform 0.2s ease;
+}
+
+.shop-logo:hover {
+  transform: scale(1.08);
+}

@@ -1,0 +1,22 @@
+<div class="drawer-backdrop" (click)="closeDrawer()"></div>
+
+<div class="drawer">
+  <button class="close-btn" (click)="closeDrawer()">✕</button>
+
+  <img
+    [src]="seller.shop_image || 'assets/default-shop.png'"
+    class="drawer-logo"
+    alt="Shop Logo"
+  />
+
+  <h3>{{ seller.shop_name }}</h3>
+
+  <p><b>Owner:</b> {{ seller.shopkeeper_name }}</p>
+  <p><b>Location:</b> {{ seller.shop_location }}</p>
+  <p><b>State:</b> {{ seller.state }}</p>
+  <p><b>District:</b> {{ seller.district }}</p>
+
+  <p *ngIf="seller.market">
+    <b>Market:</b> {{ seller.market }}
+  </p>
+</div>
